@@ -1,0 +1,76 @@
+#include<stdio.h>
+#include<string.h>
+main(){
+	int num,ans[10000],len[1000],sumlen[1000],i,j,ch[1000],count=0,p,k;
+	char frm[100];
+	for(p=0;p<=7000;p++){
+		ans[p]=0;
+	}
+	while(1){
+		scanf("%d",&num);
+		if(num==0){
+			break;
+		}
+		count++;
+		for(i=0;i<=900;i++){
+			len[i]=0;
+			sumlen[i]=0;
+			ch[i]=0;
+		}
+		for(i=1;i<=num;i++){
+			scanf("%s",&frm);
+			len[i]=strlen(frm);
+		}
+		sumlen[0]=0;
+		sumlen[1]=len[1];
+		for(i=2;i<=num;i++){
+			sumlen[i]=sumlen[i-1]+len[i];
+		}
+		for(j=1;j<=num;j++){
+			for(i=j;i<=num;i++){
+				if(sumlen[i]==5+sumlen[j-1]){
+					ch[1]=1;
+					break;
+				}
+			}
+			for(i=j;i<=num;i++){
+				if(sumlen[i]==12+sumlen[j-1]){
+					ch[2]=1;
+					break;
+				}
+			}
+			for(i=j;i<=num;i++){
+				if(sumlen[i]==17+sumlen[j-1]){
+					ch[3]=1;
+					break;
+				}
+			}
+			for(i=j;i<=num;i++){
+				if(sumlen[i]==24+sumlen[j-1]){
+					ch[4]=1;
+					break;
+				}
+			}
+			for(i=j;i<=num;i++){
+				if(sumlen[i]==31+sumlen[j-1]){
+					ch[5]=1;
+					break;
+				}
+			}
+			if(ch[1]*ch[2]*ch[3]*ch[4]*ch[5]==1){
+				ans[count]=j;
+				break;
+			}else{
+				for(k=1;k<=5;k++){
+					ch[k]=0;
+				}
+			}
+		}
+		
+	}
+	for(i=1;i<=count;i++){
+		printf("%d\n",ans[i]);
+	}
+	return 0;
+}
+
